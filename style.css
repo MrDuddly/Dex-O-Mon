@@ -1,0 +1,34 @@
+
+body {
+    background-color: rgb(41, 41, 41);
+    background-image: url('https://wallpapers.com/images/hd/pokemon-hd-pixel-art-so7xtellz0hav7mz.jpg');
+    background-size: cover;      /* cobre toda a tela */
+    background-position: center; /* centraliza a imagem */
+    background-repeat: no-repeat;;
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+h1 {
+    animation: rgb-cycle 3s infinite linear;
+}
+
+/* Animação de ciclo de cores RGB */
+@keyframes rgb-cycle {
+    0%   { color: red; }
+    25%  { color: orange; }
+    50%  { color: lime; }
+    75%  { color: cyan; }
+    100% { color: magenta; }
+}
+
+strong {
+    color: #c03737;
+}
+a {
+    color: #4cd839;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}

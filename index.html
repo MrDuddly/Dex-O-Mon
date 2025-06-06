@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DexOmon</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header></header>
+    <main>
+      <h1>Dex-O-mon</h1>
+      <strong> <a href="https://pokemondb.net/pokedex/all"> Pokédex </a></strong> 
+        <p>Qual <strong>Pokémon</strong> será que <strong>vence</strong>?</p>
+
+  <select id="pokemon1"></select>
+  <select id="pokemon2"></select>
+  <button onclick="batalhar()">Batalhar!</button>
+  <p id="resultado"></p>
+
+  <script>
+const pokemons = [
+  { nome: "Bulbasaur", tipos: ["planta", "veneno"] },
+  { nome: "Ivysaur", tipos: ["planta", "veneno"] },
+  { nome: "Venusaur", tipos: ["planta", "veneno"] },
+  { nome: "Charmander", tipos: ["fogo"] },
+  { nome: "Charmeleon", tipos: ["fogo"] },
+  { nome: "Charizard", tipos: ["fogo", "voador"] },
+  { nome: "Squirtle", tipos: ["agua"] },
+  { nome: "Wartortle", tipos: ["agua"] },
+  { nome: "Blastoise", tipos: ["agua"] },
+  { nome: "Caterpie", tipos: ["inseto"] },
+  { nome: "Metapod", tipos: ["inseto"] },
+  { nome: "Butterfree", tipos: ["inseto", "voador"] },
+  { nome: "Weedle", tipos: ["inseto", "veneno"] },
+  { nome: "Kakuna", tipos: ["inseto", "veneno"] },
+  { nome: "Beedrill", tipos: ["inseto", "veneno"] },
+  { nome: "Pidgey", tipos: ["normal", "voador"] },
+  { nome: "Pidgeotto", tipos: ["normal", "voador"] },
+  { nome: "Pidgeot", tipos: ["normal", "voador"] },
+  { nome: "Rattata", tipos: ["normal"] },
+  { nome: "Raticate", tipos: ["normal"] },
+  { nome: "Spearow", tipos: ["normal", "voador"] },
+  { nome: "Fearow", tipos: ["normal", "voador"] },
+  { nome: "Ekans", tipos: ["veneno"] },
+  { nome: "Arbok", tipos: ["veneno"] },
+  { nome: "Pikachu", tipos: ["eletrico"] },
+  { nome: "Raichu", tipos: ["eletrico"] },
+  { nome: "Sandshrew", tipos: ["terra"] },
+  { nome: "Sandslash", tipos: ["terra"] },
+  { nome: "Nidoran♀", tipos: ["veneno"] },
+  { nome: "Nidorina", tipos: ["veneno"] },
+  { nome: "Nidoqueen", tipos: ["veneno", "terra"] },
+  { nome: "Nidoran♂", tipos: ["veneno"] },
+  { nome: "Nidorino", tipos: ["veneno"] },
+  { nome: "Nidoking", tipos: ["veneno", "terra"] },
+  { nome: "Clefairy", tipos: ["fada"] },
+  { nome: "Clefable", tipos: ["fada"] },
+  { nome: "Vulpix", tipos: ["fogo"] },
+  { nome: "Ninetales", tipos: ["fogo"] },
+  { nome: "Jigglypuff", tipos: ["normal", "fada"] },
+  { nome: "Wigglytuff", tipos: ["normal", "fada"] },
+  { nome: "Zubat", tipos: ["veneno", "voador"] },
+  { nome: "Golbat", tipos: ["veneno", "voador"] },
+  { nome: "Oddish", tipos: ["planta", "veneno"] },
+  { nome: "Gloom", tipos: ["planta", "veneno"] },
+  { nome: "Vileplume", tipos: ["planta", "veneno"] },
+  { nome: "Paras", tipos: ["inseto", "planta"] },
+  { nome: "Parasect", tipos: ["inseto", "planta"] },
+  { nome: "Venonat", tipos: ["inseto", "veneno"] },
+  { nome: "Venomoth", tipos: ["inseto", "veneno"] },
+  { nome: "Diglett", tipos: ["terra"] },
+  { nome: "Dugtrio", tipos: ["terra"] },
+  { nome: "Meowth", tipos: ["normal"] },
+  { nome: "Persian", tipos: ["normal"] },
+  { nome: "Psyduck", tipos: ["agua"] },
+  { nome: "Golduck", tipos: ["agua"] },
+  { nome: "Mankey", tipos: ["lutador"] },
+  { nome: "Primeape", tipos: ["lutador"] },
+  { nome: "Growlithe", tipos: ["fogo"] },
+  { nome: "Arcanine", tipos: ["fogo"] },
+  { nome: "Poliwag", tipos: ["agua"] },
+  { nome: "Poliwhirl", tipos: ["agua"] },
+  { nome: "Poliwrath", tipos: ["agua", "lutador"] },
+  { nome: "Abra", tipos: ["psiquico"] },
+  { nome: "Kadabra", tipos: ["psiquico"] },
+  { nome: "Alakazam", tipos: ["psiquico"] },
+  { nome: "Machop", tipos: ["lutador"] },
+  { nome: "Machoke", tipos: ["lutador"] },
+  { nome: "Machamp", tipos: ["lutador"] },
+  { nome: "Bellsprout", tipos: ["planta", "veneno"] },
+  { nome: "Weepinbell", tipos: ["planta", "veneno"] },
+  { nome: "Victreebel", tipos: ["planta", "veneno"] },
+  { nome: "Tentacool", tipos: ["agua", "veneno"] },
+  { nome: "Tentacruel", tipos: ["agua", "veneno"] },
+  { nome: "Geodude", tipos: ["pedra", "terra"] },
+  { nome: "Graveler", tipos: ["pedra", "terra"] },
+  { nome: "Golem", tipos: ["pedra", "terra"] },
+  { nome: "Ponyta", tipos: ["fogo"] },
+  { nome: "Rapidash", tipos: ["fogo"] },
+  { nome: "Slowpoke", tipos: ["agua", "psiquico"] },
+  { nome: "Slowbro", tipos: ["agua", "psiquico"] },
+  { nome: "Magnemite", tipos: ["eletrico", "aco"] },
+  { nome: "Magneton", tipos: ["eletrico", "aco"] },
+  { nome: "Farfetch’d", tipos: ["normal", "voador"] },
+  { nome: "Doduo", tipos: ["normal", "voador"] },
+  { nome: "Dodrio", tipos: ["normal", "voador"] },
+  { nome: "Seel", tipos: ["agua"] },
+  { nome: "Dewgong", tipos: ["agua", "gelo"] },
+  { nome: "Grimer", tipos: ["veneno"] },
+  { nome: "Muk", tipos: ["veneno"] },
+  { nome: "Shellder", tipos: ["agua"] },
+  { nome: "Cloyster", tipos: ["agua", "gelo"] },
+  { nome: "Gastly", tipos: ["fantasma", "veneno"] },
+  { nome: "Haunter", tipos: ["fantasma", "veneno"] },
+  { nome: "Gengar", tipos: ["fantasma", "veneno"] },
+  { nome: "Onix", tipos: ["pedra", "terra"] },
+  { nome: "Drowzee", tipos: ["psiquico"] },
+  { nome: "Hypno", tipos: ["psiquico"] },
+  { nome: "Krabby", tipos: ["agua"] },
+  { nome: "Kingler", tipos: ["agua"] },
+  { nome: "Voltorb", tipos: ["eletrico"] },
+  { nome: "Electrode", tipos: ["eletrico"] },
+  { nome: "Exeggcute", tipos: ["planta", "psiquico"] },
+  { nome: "Exeggutor", tipos: ["planta", "psiquico"] },
+  { nome: "Cubone", tipos: ["terra"] },
+  { nome: "Marowak", tipos: ["terra"] },
+  { nome: "Hitmonlee", tipos: ["lutador"] },
+  { nome: "Hitmonchan", tipos: ["lutador"] },
+  { nome: "Lickitung", tipos: ["normal"] },
+  { nome: "Koffing", tipos: ["veneno"] },
+  { nome: "Weezing", tipos: ["veneno"] },
+  { nome: "Rhyhorn", tipos: ["terra", "pedra"] },
+  { nome: "Rhydon", tipos: ["terra", "pedra"] },
+  { nome: "Chansey", tipos: ["normal"] },
+  { nome: "Tangela", tipos: ["planta"] },
+  { nome: "Kangaskhan", tipos: ["normal"] },
+  { nome: "Horsea", tipos: ["agua"] },
+  { nome: "Seadra", tipos: ["agua"] },
+  { nome: "Goldeen", tipos: ["agua"] },
+  { nome: "Seaking", tipos: ["agua"] },
+  { nome: "Staryu", tipos: ["agua"] },
+  { nome: "Starmie", tipos: ["agua", "psiquico"] },
+  { nome: "Mr. Mime", tipos: ["psiquico", "fada"] },
+  { nome: "Scyther", tipos: ["inseto", "voador"] },
+  { nome: "Jynx", tipos: ["gelo", "psiquico"] },
+  { nome: "Electabuzz", tipos: ["eletrico"] },
+  { nome: "Magmar", tipos: ["fogo"] },
+  { nome: "Pinsir", tipos: ["inseto"] },
+  { nome: "Tauros", tipos: ["normal"] },
+  { nome: "Magikarp", tipos: ["agua"] },
+  { nome: "Gyarados", tipos: ["agua", "voador"] },
+  { nome: "Lapras", tipos: ["agua", "gelo"] },
+  { nome: "Ditto", tipos: ["normal"] },
+  { nome: "Eevee", tipos: ["normal"] },
+  { nome: "Vaporeon", tipos: ["agua"] },
+  { nome: "Jolteon", tipos: ["eletrico"] },
+  { nome: "Flareon", tipos: ["fogo"] },
+  { nome: "Porygon", tipos: ["normal"] },
+  { nome: "Omanyte", tipos: ["pedra", "agua"] },
+  { nome: "Omastar", tipos: ["pedra", "agua"] },
+  { nome: "Kabuto", tipos: ["pedra", "agua"] },
+  { nome: "Kabutops", tipos: ["pedra", "agua"] },
+  { nome: "Aerodactyl", tipos: ["pedra", "voador"] },
+  { nome: "Snorlax", tipos: ["normal"] },
+  { nome: "Articuno", tipos: ["gelo", "voador"] },
+  { nome: "Zapdos", tipos: ["eletrico", "voador"] },
+  { nome: "Moltres", tipos: ["fogo", "voador"] },
+  { nome: "Dratini", tipos: ["dragao"] },
+  { nome: "Dragonair", tipos: ["dragao"] },
+  { nome: "Dragonite", tipos: ["dragao", "voador"] },
+  { nome: "Mewtwo", tipos: ["psiquico"] },
+  { nome: "Mew", tipos: ["psiquico"] }
+];
+
+
+    const efetividades = {
+      fogo: ["planta", "inseto", "gelo", "aco"],
+      agua: ["fogo", "terra", "pedra"],
+      planta: ["agua", "terra", "pedra"],
+      eletrico: ["agua", "voador"],
+      terra: ["fogo", "eletrico", "veneno", "pedra", "aco"],
+      pedra: ["fogo", "gelo", "voador", "inseto"],
+      voador: ["planta", "inseto", "lutador"],
+      lutador: ["normal", "pedra", "gelo", "aco", "sombrio"],
+      fantasma: ["psiquico", "fantasma"],
+      psiquico: ["lutador", "veneno"],
+      venenoso: ["planta", "fada"],
+      gelo: ["planta", "terra", "voador", "dragao"],
+      dragao: ["dragao"],
+      fada: ["lutador", "dragao", "sombrio"],
+      inseto: ["planta", "psiquico", "sombrio"],
+      sombrio: ["psiquico", "fantasma"],
+      aco: ["fada", "gelo", "pedra"],
+      normal: [],
+    };
+
+    const select1 = document.getElementById("pokemon1");
+    const select2 = document.getElementById("pokemon2");
+
+    pokemons.forEach(p => {
+      const option1 = document.createElement("option");
+      option1.value = p.nome;
+      option1.textContent = p.nome;
+      select1.appendChild(option1);
+
+      const option2 = document.createElement("option");
+      option2.value = p.nome;
+      option2.textContent = p.nome;
+      select2.appendChild(option2);
+    });
+
+    function getPokemonByName(nome) {
+      return pokemons.find(p => p.nome === nome);
+    }
+
+    function calculaVantagem(tipos1, tipos2) {
+      let pontos1 = 0;
+      let pontos2 = 0;
+
+      tipos1.forEach(tipo1 => {
+        tipos2.forEach(tipo2 => {
+          if (efetividades[tipo1]?.includes(tipo2)) pontos1++;
+          if (efetividades[tipo2]?.includes(tipo1)) pontos2++;
+        });
+      });
+
+      if (pontos1 > pontos2) return 1;
+      if (pontos2 > pontos1) return 2;
+      return 0; // empate
+    }
+
+    function batalhar() {
+      const nome1 = select1.value;
+      const nome2 = select2.value;
+
+      const p1 = getPokemonByName(nome1);
+      const p2 = getPokemonByName(nome2);
+
+      const resultado = calculaVantagem(p1.tipos, p2.tipos);
+
+      const resEl = document.getElementById("resultado");
+
+      if (resultado === 1) {
+        resEl.innerText = `${p1.nome} vence!`;
+      } else if (resultado === 2) {
+        resEl.innerText = `${p2.nome} vence!`;
+      } else {
+        resEl.innerText = `Empate!`;
+      }
+    }
+  </script>
+        
+        <a href="https://www.instagram.com/mrduddly/">Instagram</a>
+    </main>
+    <footer></footer>
+
+</body>
+</html>
+
