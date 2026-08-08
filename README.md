@@ -7,5 +7,3 @@
 </div>
 
 
-
-https://www.instagram.com/mrduddly/
